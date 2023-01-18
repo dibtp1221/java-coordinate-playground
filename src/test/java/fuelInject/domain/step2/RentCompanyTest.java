@@ -1,4 +1,4 @@
-package fuelInject.domain;
+package fuelInject.domain.step2;
 
 import org.junit.jupiter.api.Test;
 
@@ -8,7 +8,7 @@ public class RentCompanyTest {
     private static final String NEWLINE = System.getProperty("line.separator");
 
     @Test
-    public void report() {
+    public void report() throws Exception {
         RentCompany company = RentCompany.create(); // factory method를 사용해 생성
         company.addCar(new Sonata(150));
         company.addCar(new K5(260));

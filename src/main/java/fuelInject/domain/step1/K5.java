@@ -1,4 +1,4 @@
-package fuelInject.domain;
+package fuelInject.domain.step1;
 
 public class K5 extends Car {
     public K5(int distance) {

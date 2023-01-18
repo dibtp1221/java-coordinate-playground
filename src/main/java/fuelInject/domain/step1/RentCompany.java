@@ -1,4 +1,4 @@
-package fuelInject.domain;
+package fuelInject.domain.step1;
 
 import java.util.ArrayList;
 import java.util.stream.Collectors;
