@@ -24,3 +24,9 @@ git checkout main // 기본 브랜치가 main인 경우
 git checkout -b 브랜치이름
 ex) git checkout -b apply-feedback
 ```
+
+## 좌표계산기 (선 길이) 구현목록
+- 입력에서 값 추출
+- 범위 검사 & 무효한 입력의 경우 에러 문구 출력 후 다시 입력 받기
+- UI (좌표계 출력)
+- 거리 계산
