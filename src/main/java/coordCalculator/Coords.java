@@ -22,6 +22,21 @@ public class Coords {
         }
     }
 
+    public void printCoord() {
+        for (int i=24; i>=0; i--) {
+            System.out.printf("%2d|\n", i);
+        }
+        System.out.print("  +");
+        for (int i=0; i<24; i++) {
+            System.out.print("--");
+        }
+        System.out.println();
+        for (int i=0; i<=24; i+=2) {
+            System.out.printf("%4d", i);
+        }
+        System.out.println();
+    }
+
     public double calc() {
         if (size == 2) {
             return calcLineLength();
