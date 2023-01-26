@@ -23,6 +23,10 @@ class CoordsTest {
 
         coords = new Coords(4, new ArrayList<>(Arrays.asList(new Point(10, 10), new Point(14, 15),  new Point(14, 10),  new Point(10, 15))));
         assertEquals(20, coords.calc());
+
+        coords = new Coords(3, new ArrayList<>(Arrays.asList(new Point(10, 10), new Point(14, 15), new Point(20, 8))));
+        assertEquals(29.0, coords.calc(), 0.1);
+
     }
 
     @Test

@@ -14,7 +14,8 @@ public class Main {
 
         Coords coords = inputParseService.parse(input);
         coords.printCoord();
-        System.out.println("두 점 사이 거리는 " + coords.calc());
+
+        coords.printCalcResult();
     }
 
 }

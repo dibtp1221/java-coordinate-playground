@@ -15,6 +15,9 @@ public class Coords {
         this.size = size;
         this.points = list;
         this.chkPointsBound();
+        if (size == 4) {
+            chkRectangle();
+        }
     }
 
     public void chkPointsBound() {
@@ -66,23 +69,42 @@ public class Coords {
         System.out.println();
     }
 
+    public void printCalcResult() {
+        if (size == 2) {
+            System.out.println("두 점 사이 거리는 " + calcLineLength());
+        }
+        if (size == 4) {
+            System.out.println("사각형 넓이는 " + calcRectAngleArea());
+        }
+        if (size == 3) {
+            System.out.printf("삼각형 넓이는 %.1f\n", calcTriAngleArea());
+        }
+    }
+
     public double calc() {
         if (size == 2) {
             return calcLineLength();
         }
         if (size == 4) {
-            return calcArea();
+            return calcRectAngleArea();
+        }
+        if (size == 3) {
+            return calcTriAngleArea();
         }
         return 0;
     }
 
     private double calcLineLength() {
-        int xDiff = points.get(0).xDiff(points.get(1));
-        int yDiff = points.get(0).yDiff(points.get(1));
+        return calcLineLength(points.get(0), points.get(1));
+    }
+
+    private double calcLineLength(Point p1, Point p2) {
+        int xDiff = p1.xDiff(p2);
+        int yDiff = p1.yDiff(p2);
         return Math.sqrt(xDiff * xDiff + yDiff * yDiff);
     }
 
-    private int calcArea() {
+    private int calcRectAngleArea() {
 
         HashMap<Integer, Integer> countX = countX();
         HashMap<Integer, Integer> countY = countY();
@@ -94,6 +116,15 @@ public class Coords {
         int height = Math.abs(Ys.get(0) - Ys.get(1));
 
         return width * height;
+    }
+
+    private double calcTriAngleArea() {
+        double lineA = calcLineLength(points.get(0), points.get(1));
+        double lineB = calcLineLength(points.get(0), points.get(2));
+        double lineC = calcLineLength(points.get(1), points.get(2));
+
+        double v = lineA * lineA + lineB * lineB - lineC * lineC;
+        return Math.sqrt((4*lineA*lineA*lineB*lineB) - v * v) / 4;
     }
 
     private HashMap<Integer, Integer> countY() {
