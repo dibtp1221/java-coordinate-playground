@@ -21,4 +21,13 @@ class CoordsTest {
         Coords coords = new Coords(2, new ArrayList<>(Arrays.asList(new Point(10, 10), new Point(14, 15))));
         assertEquals(6.403, coords.calc(), 0.001);
     }
+
+    @Test
+    void chkRectangle() {
+        Coords coords = new Coords(4, new ArrayList<>(Arrays.asList(new Point(10, 10), new Point(14, 15),  new Point(14, 10),  new Point(10, 15))));
+        assertDoesNotThrow(coords::chkRectangle);
+
+        coords = new Coords(4, new ArrayList<>(Arrays.asList(new Point(10, 11), new Point(14, 15),  new Point(14, 10),  new Point(10, 15))));
+        assertThrows(InvalidInputException.class, coords::chkRectangle);
+    }
 }

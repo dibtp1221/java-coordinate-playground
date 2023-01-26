@@ -28,6 +28,14 @@ public class Point {
         return Math.abs(this.y - p2.y);
     }
 
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

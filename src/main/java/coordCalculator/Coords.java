@@ -1,6 +1,8 @@
 package coordCalculator;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Objects;
 
 public class Coords {
@@ -19,6 +21,36 @@ public class Coords {
         boolean invalid = points.stream().anyMatch(point -> point.isNotInBound(BOUND));
         if (invalid) {
             throw new InvalidInputException("입력값 범위 오류");
+        }
+    }
+
+    public void chkRectangle() {
+        consist4DifferentPoints();
+
+        pointsMakesRectangle();
+    }
+
+    private void consist4DifferentPoints() {
+        HashSet<Point> set = new HashSet<>(points);
+        if (set.size() != 4) {
+            throw new InvalidInputException("사각형 입력 무효");
+        }
+    }
+
+    private void pointsMakesRectangle() {
+        HashMap<Integer, Integer> countX = new HashMap<>();
+        HashMap<Integer, Integer> countY = new HashMap<>();
+
+        for (Point point : points) {
+            countX.put(point.getX(), countX.getOrDefault(point.getX(), 0) + 1);
+            countY.put(point.getY(), countY.getOrDefault(point.getY(), 0) + 1);
+        }
+        boolean XAndYOnlyTwoNumbers = countX.keySet().size() == 2 && countY.keySet().size() == 2;
+        boolean eachXTwice = countX.values().stream().allMatch(v -> v == 2);
+        boolean eachYTwice = countY.values().stream().allMatch(v -> v == 2);
+
+        if (!XAndYOnlyTwoNumbers || !eachXTwice || !eachYTwice) {
+            throw new InvalidInputException("사각형 입력 무효");
         }
     }
 
