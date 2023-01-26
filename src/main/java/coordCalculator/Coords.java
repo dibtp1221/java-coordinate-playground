@@ -38,13 +38,10 @@ public class Coords {
     }
 
     private void pointsMakesRectangle() {
-        HashMap<Integer, Integer> countX = new HashMap<>();
-        HashMap<Integer, Integer> countY = new HashMap<>();
 
-        for (Point point : points) {
-            countX.put(point.getX(), countX.getOrDefault(point.getX(), 0) + 1);
-            countY.put(point.getY(), countY.getOrDefault(point.getY(), 0) + 1);
-        }
+        HashMap<Integer, Integer> countX = countX();
+        HashMap<Integer, Integer> countY = countY();
+
         boolean XAndYOnlyTwoNumbers = countX.keySet().size() == 2 && countY.keySet().size() == 2;
         boolean eachXTwice = countX.values().stream().allMatch(v -> v == 2);
         boolean eachYTwice = countY.values().stream().allMatch(v -> v == 2);
@@ -73,6 +70,9 @@ public class Coords {
         if (size == 2) {
             return calcLineLength();
         }
+        if (size == 4) {
+            return calcArea();
+        }
         return 0;
     }
 
@@ -80,6 +80,36 @@ public class Coords {
         int xDiff = points.get(0).xDiff(points.get(1));
         int yDiff = points.get(0).yDiff(points.get(1));
         return Math.sqrt(xDiff * xDiff + yDiff * yDiff);
+    }
+
+    private int calcArea() {
+
+        HashMap<Integer, Integer> countX = countX();
+        HashMap<Integer, Integer> countY = countY();
+
+        ArrayList<Integer> Xs = new ArrayList<>(countX.keySet());
+        ArrayList<Integer> Ys = new ArrayList<>(countY.keySet());
+
+        int width = Math.abs(Xs.get(0) - Xs.get(1));
+        int height = Math.abs(Ys.get(0) - Ys.get(1));
+
+        return width * height;
+    }
+
+    private HashMap<Integer, Integer> countY() {
+        HashMap<Integer, Integer> countY = new HashMap<>();
+        for (Point point : points) {
+            countY.put(point.getY(), countY.getOrDefault(point.getY(), 0) + 1);
+        }
+        return countY;
+    }
+
+    private HashMap<Integer, Integer> countX() {
+        HashMap<Integer, Integer> countX = new HashMap<>();
+        for (Point point : points) {
+            countX.put(point.getX(), countX.getOrDefault(point.getX(), 0) + 1);
+        }
+        return countX;
     }
 
     @Override
