@@ -1,6 +1,7 @@
-package coordCalc;
+package coordCalc.view;
 
-import java.util.ArrayList;
+import coordCalc.model.Point;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -14,13 +15,16 @@ public class InputService {
     private static final String ERROR_INVALID_COORDINATES = "올바르지 않은 입력값";
     private static final String DELIMITER = "-";
     private static final Scanner scanner = new Scanner(System.in);
+    public static final int UPPER_BOUND = 24;
+    public static final String INPUT_COMMENT = "좌표를 입력하세요.";
 
     public static List<Point> inputCoords() {
         try {
+            System.out.println(INPUT_COMMENT);
             return inputCoords(scanner.nextLine());
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            return inputCoords(scanner.nextLine());
+            return inputCoords();
         }
     }
 
@@ -45,9 +49,16 @@ public class InputService {
         if (matcher.find()) {
             int x = Integer.parseInt(matcher.group(1));
             int y = Integer.parseInt(matcher.group(2));
-            return new Point(x, y);
+            Point point = new Point(x, y);
+            chkPointBound(point);
+            return point;
         }
         throw new IllegalArgumentException(ERROR_INVALID_COORDINATES);
     }
 
+    protected static void chkPointBound(Point point) {
+        if (point.getX() > UPPER_BOUND || point.getY() > UPPER_BOUND) {
+            throw new IllegalArgumentException("범위 초과");
+        }
+    }
 }
