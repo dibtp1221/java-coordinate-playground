@@ -24,3 +24,9 @@ git checkout main // 기본 브랜치가 main인 경우
 git checkout -b 브랜치이름
 ex) git checkout -b apply-feedback
 ```
+
+구현 기능 목록
+- 입력 받아 검증하는 기능
+- Figure 클래스들 다형성 (선, 삼각형, 사각형) 구현
+- 입력 -> Figure 클래스로
+- 결과 반환
